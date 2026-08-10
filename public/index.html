@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create the perfect AI-curated mixtape in seconds. Turn your mood and thoughts into a custom playlist of real songs." />
+  <meta name="theme-color" content="#E8436F" />
+  <title>Mixtape Generator — AI Playlist Generator</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Forum&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="24" height="24" rx="7" fill="url(#brand-grad)"/>
+            <path d="M12 7V17M12 7L16 11M12 7L8 11" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="brand-grad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#E8436F"/>
+                <stop offset="1" stop-color="#D81B60"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">AI Playlist Generator</span>
+          <span class="badge">BETA</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page">
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="eyebrow">A TAPE MADE JUST FOR YOU</div>
+      <h1 class="label-font title">Create the perfect playlist in seconds</h1>
+      <p class="subtitle">Our advanced AI playlist maker will give you full creative control, and turn your thoughts into a perfect playlist</p>
+    </header>
+
+    <!-- Main Generator Card -->
+    <main class="cassette" id="cassette">
+      <section class="form" id="form-section">
+        <!-- Mood Input & Chips -->
+        <div class="field field-full">
+          <label for="mood">Mood</label>
+          <div class="input-with-icon">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+            </svg>
+            <input id="mood" type="text" placeholder="e.g. missing someone tonight, rainy evening vibes..." />
+          </div>
+          <div class="chips" id="mood-chips"></div>
+        </div>
+
+        <!-- 2 Column Row: Language & Artist -->
+        <div class="form-row">
+          <div class="field">
+            <label for="language">Language (optional)</label>
+            <input id="language" type="text" placeholder="e.g. Hindi, English, Korean" />
+          </div>
+
+          <div class="field">
+            <label for="artist">Artist (optional)</label>
+            <input id="artist" type="text" placeholder="e.g. Arijit Singh" />
+          </div>
+        </div>
+
+        <!-- Anything Else & Song Count Row -->
+        <div class="form-row">
+          <div class="field">
+            <label for="extra">Anything else (optional)</label>
+            <textarea id="extra" rows="2" placeholder="study session, acoustic, road trip..."></textarea>
+          </div>
+
+          <div class="field">
+            <label for="count">How many songs — up to <span id="count-value">15</span></label>
+            <input id="count" type="range" min="5" max="30" step="1" value="15" />
+            <div class="hint">The AI only includes songs that genuinely exist and fit the brief well.</div>
+          </div>
+        </div>
+
+        <div class="error" id="error"></div>
+
+        <button class="gen-btn" id="generate-btn">
+          <span>GENERATE MIXTAPE</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </section>
+
+      <section class="results" id="results-section" hidden>
+        <div class="label-font tracklist-heading">YOUR CURATED TRACKLIST</div>
+        <div class="tracklist" id="tracklist"></div>
+        <button class="gen-btn ghost" id="another-btn">CREATE ANOTHER MIXTAPE</button>
+      </section>
+    </main>
+
+    <!-- Platform Icons Bar -->
+    <section class="platforms-section">
+      <p class="platforms-subtitle">Generate your Spotify playlist, Apple Music, YouTube Music — or any music service you love</p>
+      <div class="platforms-grid">
+        <div class="platform-badge"><span class="icon">🎵</span> Spotify</div>
+        <div class="platform-badge"><span class="icon">🍎</span> Apple Music</div>
+        <div class="platform-badge"><span class="icon">📦</span> Amazon Music</div>
+        <div class="platform-badge"><span class="icon">▶️</span> YouTube Music</div>
+        <div class="platform-badge"><span class="icon">🌊</span> TIDAL</div>
+        <div class="platform-badge"><span class="icon">🎧</span> Deezer</div>
+      </div>
+    </section>
+
+    <div class="footnote">Songs are AI-curated suggestions — please double check before sharing</div>
+  </div>
+
+  <!-- Bottom Cookie / Info Banner -->
+  <footer class="cookie-banner">
+    <div class="cookie-content">
+      <span>We use cookies to improve your experience on our website, and to help us understand how visitors use it. By using this site, you agree to this use. <a href="#">See details</a></span>
+      <button class="cookie-btn" onclick="this.parentElement.parentElement.style.display='none'">OK</button>
+    </div>
+  </footer>
+
+  <footer class="site-footer">
+    <div class="site-footer-content">© 2026 Bharat Mehta. All rights reserved.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
