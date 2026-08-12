@@ -13,6 +13,7 @@ const anotherBtn = document.getElementById("another-btn");
 const formSection = document.getElementById("form-section");
 const resultsSection = document.getElementById("results-section");
 const tracklistEl = document.getElementById("tracklist");
+const API_BASE_URL = window.MIXTAPE_API_BASE_URL || "";
 
 // Build mood preset chips
 MOOD_PRESETS.forEach((m) => {
@@ -43,7 +44,7 @@ async function generate() {
   generateBtn.innerHTML = `<span>CURATING PLAYLIST...</span>`;
 
   try {
-    const res = await fetch("/api/generate", {
+    const res = await fetch(`${API_BASE_URL}/api/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

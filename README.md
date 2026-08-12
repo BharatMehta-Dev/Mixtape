@@ -39,13 +39,15 @@ backend must live on Render, and the frontend must call that Render URL.
 4. Deploy and copy the Render URL, for example `https://your-app.onrender.com`
 
 ### C. Point the frontend to Render
-The frontend currently calls `/api/generate`, which only works locally.
-Before deploying to GitHub Pages, update the fetch URL in `public/script.js` so
-it points to your Render backend, for example:
+The frontend now reads the backend URL from a single config line in
+`public/index.html`:
 
 ```js
-fetch("https://your-app.onrender.com/api/generate", {
+window.MIXTAPE_API_BASE_URL = "https://your-app.onrender.com";
 ```
+
+Replace that URL with your real Render backend URL. The request in
+`public/script.js` will automatically use it.
 
 ### D. Deploy the frontend on GitHub Pages
 1. Go to your GitHub repository settings

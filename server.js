@@ -5,6 +5,7 @@ const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const FRONTEND_URL = process.env.FRONTEND_URL || process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
 
 // API Key for OpenRouter
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
@@ -20,6 +21,18 @@ if (!OPENROUTER_API_KEY) {
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
 
 // POST /api/generate
 app.post("/api/generate", async (req, res) => {
@@ -65,7 +78,7 @@ Respond with ONLY a raw JSON object, no markdown fences, no preamble, in exactly
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        "HTTP-Referer": `http://localhost:${PORT}`,
+        "HTTP-Referer": FRONTEND_URL,
         "X-Title": "Mixtape Generator",
       },
       body: JSON.stringify({
